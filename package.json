@@ -1,0 +1,52 @@
+{
+    "name": "rauschen-processor",
+    "preferGlobal": "true",
+    "version": "0.0.0",
+    "author": "Thomas Peklak <thomas.peklak@gmail.com>",
+    "description": "a website performance monitor that leverages window.performance.timing",
+    "contributors": [
+        {
+            "name": "Thomas Peklak",
+            "email": "thomas.peklak@gmail.com"
+        }
+    ],
+    "scripts": {
+        "start" : "node .",
+        "test": "node_modules/mocha/bin/mocha"
+    },
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "server",
+        "web",
+        "performance",
+        "monitor"
+    ],
+    "dependencies" : {
+        "scuttlebutt"       : "*"
+        , "geoip"             : "*"
+        , "useragent"         : "*"
+        , "through"           : "*"
+        , "pause-stream"      : "*"
+        , "event-stream"      : "*"
+        , "stream-serializer" : "*"
+        , "mongodb"           : "*"
+    },
+    "devDependencies": {
+        "coffee-script" : "*"
+        , "mocha"       : "*"
+        , "should"      : "*"
+        , "sinon"       : "*"
+        , "supertest"   : "*"
+        , "growl"       : "*"
+        , "forever"     : "*"
+        , "request"     : "*"
+    },
+    "license": "MIT",
+    "engine": {
+        "node": ">=0.8"
+    }
+}
