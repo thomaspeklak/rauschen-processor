@@ -34,6 +34,7 @@
         , "event-stream"      : "*"
         , "stream-serializer" : "*"
         , "mongodb"           : "*"
+        , "events-counter"    : "*"
     },
     "devDependencies": {
         "coffee-script" : "*"
