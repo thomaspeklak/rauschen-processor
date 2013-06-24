@@ -47,6 +47,9 @@
     "forever": "*",
     "request": "*"
   },
+  "peerDependencies": {
+    "rauschen-receiver": "0.0.0"
+  },
   "license": "MIT",
   "engine": {
     "node": ">=0.8"
