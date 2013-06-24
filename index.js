@@ -1,17 +1,24 @@
 "use strict";
 
 var packageInfo = require("./package");
+var seaportConf = {
+    host: process.argv[2],
+    port: parseInt(process.argv[3], 10)
+};
+
 var net = require("net");
 var Scuttlebutt = require("scuttlebutt/model");
 var timing = new Scuttlebutt();
-var socket = require("./config").sockets.receiver;
-//var persistenceStream = require("./lib/persistence-stream");
+
+var persistenceStream = require("./lib/persistence-stream");
 var dataExtractionStream = require("./lib/data-extraction-stream");
 var dataEnrichStream = require("./lib/data-enrich-stream");
 
 var timingStream = timing.createStream();
 var enrichedStream = timingStream.pipe(dataExtractionStream()).pipe(dataEnrichStream());
-//enrichedStream.pipe(persistenceStream);
+var client = require("rauschen-registry").client;
+var config = client(seaportConf.host, seaportConf.port);
+enrichedStream.pipe(persistenceStream(config));
 
 //@TODO refactor to use seaport
 //used for RTA
@@ -32,15 +39,7 @@ var msg = function (message) {
 };
 
 var seaport = require("seaport");
-var seaportConf = {
-    host: process.argv[2],
-    port: parseInt(process.argv[3], 10)
-};
 var ports = seaport.connect(seaportConf.host, seaportConf.port);
-
-//var client = require("rauschen-registry").client;
-//var config = client(seaportConf.host, seaportConf.port);
-//config.on("update", function () {});
 
 var initilizeStream = function () {
     ports.get("distributor@" + packageInfo.peerDependencies["rauschen-receiver"], function (ps) {
@@ -53,7 +52,7 @@ var initilizeStream = function () {
             initilizeStream();
         };
 
-        connection.on("connect", msg("connecting to receiver"));
+        connection.on("connect", msg("connecting to distributor"));
         connection.on("timeout", msg("stream timeout"));
         connection.on("close", cleanupAndInitialize);
 

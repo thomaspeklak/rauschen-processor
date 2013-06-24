@@ -34,8 +34,10 @@
     "event-stream": "*",
     "stream-serializer": "*",
     "mongodb": "*",
-    "events-counter": "*",
-    "seaport": "~1.5.0"
+    "seaport": "~1.5.0",
+    "events-counter": "~0.0.0",
+    "rauschen-registry": "~0.0.0",
+    "rauschen-hostname-to-collection": "~0.0.0"
   },
   "devDependencies": {
     "coffee-script": "*",
